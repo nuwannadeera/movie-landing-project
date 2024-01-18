@@ -12,17 +12,14 @@ function App() {
   const [myMovie, setsearchMovie] = useState('');
 
   const searchMovies = async (title) => {
-    console.log(title);
     const response = await fetch(`${API_URL}&s=${title}`)
-    // const response1 = await fetch(`${API_URL}`)
-    // title !== '' ? response : response1
     const data = await response.json();
     setMovies(data.Search);
   }
 
-  useEffect(() => {
-    searchMovies(myMovie);
-  }, [])
+  // useEffect(() => {
+  //   searchMovies(myMovie);
+  // }, [])
 
   const changeOnMovie = (e) => {
     setsearchMovie(e.target.value);
@@ -32,15 +29,15 @@ function App() {
     <div className="app">
       <h1>MovieLand</h1>
       <div className='search'>
-        <input placeholder='Search For Movies' value={myMovie} 
-        onChange={changeOnMovie}/>
+        <input placeholder='Search For Movies' value={myMovie}
+          onChange={changeOnMovie} />
         <img src={SearchIcon} alt='search' onClick={() => searchMovies(myMovie)} />
       </div>
       {movies?.length > 0 ? (
         <div className='container'>
           {
             movies.map((movie) => (
-              <MovieList movie={movie} key={movie.imdbID}/>
+              <MovieList movie={movie} key={movie.imdbID} />
             ))
           }
         </div>
